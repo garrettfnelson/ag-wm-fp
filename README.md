@@ -1,6 +1,6 @@
 # Team Name
 
-### Team Members
+### California Forty Winers
 
 ### Final Proposal
 1. Persona/Scenario
