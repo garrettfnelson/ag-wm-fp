@@ -1,8 +1,24 @@
 /*insert style here*/
 
-#map{
+#map {
+    float:left;
     height: 600px;
     width: 600px;
     border: medium solid #999;
     margin: 10px 0 0 20px;
+}
+
+#svgHolder {
+    float: left;
+    width: 600px;
+    height: 600px;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }

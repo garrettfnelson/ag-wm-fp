@@ -1,5 +1,9 @@
 "use strict";
 
+var geojson;
+var map;
+var info = L.control();
+
 window.onload = function () {
     renderMap();
 }
