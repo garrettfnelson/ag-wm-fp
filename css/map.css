@@ -10,7 +10,7 @@
     /* text-align: center; */
 }
 
-#svg {
+#chart {
     float:right;
     height: 600px;
     width: 47%;
@@ -20,6 +20,7 @@
     /* text-align: center; */
 }
 
+/* not yet used */
 .info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
