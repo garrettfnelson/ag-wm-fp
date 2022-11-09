@@ -1,0 +1,7 @@
+.bar {
+    fill: red;
+  }
+
+  .axis--x path {
+    display: none;
+  }
