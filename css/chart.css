@@ -1,7 +1,7 @@
-.bar {
-    fill: red;
-  }
-
-  .axis--x path {
-    display: none;
-  }
+#chart {
+  float: right;
+  border: medium solid #999;
+  margin: 10px 0 0 20px;
+  width: 45%;
+  height: 600px;
+}
