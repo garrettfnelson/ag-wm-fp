@@ -43,7 +43,7 @@ function addLayers() {
     pointToLayer: pointToCircle
   });
 
-  map.addLayer(countiesLayer);
+  // map.addLayer(countiesLayer);
 };
 
 
