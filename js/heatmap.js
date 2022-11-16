@@ -73,7 +73,7 @@ function draw(data) {
     .attr('width', xScale.bandwidth())
     .attr('height', yScale.bandwidth())
     .style('fill', d => colorScale(d.value))
-    .style('stroke', 'black')
+    .style('stroke', 'red')
     .style('stroke-width', 4)
     .style('stroke-opacity', 0)
     .style('fill-opacity', 0.7)
@@ -81,7 +81,9 @@ function draw(data) {
     .on('mousemove', show_info)
     .on('mouseleave', function(d) {
       hide_info()
-      lighten_square(d, this) // need to explicitly pass this
+      
+      reset_highlight(d, this) // need to explicitly pass this
+      
     })
     .on('click', change_border_color)
 
@@ -125,11 +127,17 @@ function draw(data) {
     d3.selectAll('.tooltip, .info').style('visibility', 'hidden')
   }
 
-  function lighten_square(d, ref) {
-    d3.select(ref)
-      .style('stroke-opacity', 0.5)
-      .style('fill-opacity', 0.7)
+  function change_border_color(d) {
+    let target = d3.select(this)
+    let color = target.style('stroke') // read the current stroke value
+    target.style('stroke', color == 'red' ? 'blue' : 'red')
   }
+
+function reset_highlight(d, ref) {
+   d3.select(ref)
+    .style('stroke-opacity', 0)
+    .style('fill-opacity', 0.7)
+ }
 
   function change_border_color(d) {
     let target = d3.select(this)
