@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 var geojson;
 var map;
@@ -19,49 +19,121 @@ function renderMap() {
     maxZoom: 16
   }).addTo(map);
 
-  let countiesLayer = L.geoJSON(counties, {
-    style: style
-  });
-
-  map.addLayer(countiesLayer);
+  L.geoJSON(countyBoundaries, {
+    //filter: filterCounties
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
 
 }
 
-
-// function pointToCircle(feature, latlng) {
-//   let fillColorVar = "";
-//   let radiusColor = "";
-
-//   let geojsonMarkerOptions = {
-//     radius: 8,
-//     fillColor: fillColorVar,
-//     color: radiusColor,
-//     weight: 1,
-//     opacity: 1,
-//     fillOpacity: 0.8
-//   };
-
-//   let circleMarker = L.circleMarker(latlng, geojsonMarkerOptions);
-//   return circleMarker;
-// }
+// function filterCounties(){
+//   for (i=0; i<countyBoundaries.length; i++){
+//     let jsonCountyName = countyBoundaries.features.properties.COUNTY_NAME;
+//     console.log(jsonCountyName);
+//     let csvCountyName = counties.features.properties.County;
+//     for(j=0; i<counties.length; i++){
+//       if(jsonCountyName[i] === csvCountyName[j]){
+//         jsonCountyName.clearLayers();
+//       }
+//       else{ 
+//         return true;
+//       }
+//     }
+//   }
+// };
 
 function style(feature) {
   return {
     weight: 2,
     opacity: 1,
     color: 'white',
-    dashArray: '3',
-    fillOpacity: 0.7,
-    fillColor: 'blue' //getColor(feature.properties.density)
+    //dashArray: '3',
+    fillOpacity: 1,
+    fillColor: 'rgb(132,54,64)'
   };
 }
+function triggerMapHighlight(stateName) {
+  var layers = geojson.getLayers();
 
-// function addLayers() {
-//   let countiesLayer = L.geoJSON(counties, {
-//     style: style
-//   });
+  for (var i = 0; i < layers.length; i++) {
+    if (layers[i].feature.properties.name === stateName) {
+      var layer = layers[i];
 
-//   map.addLayer(countiesLayer);
-// };
+      layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+      });
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+      }
+    }
+  }
+}
 
+// function triggerMapClick(stateName){
+//     var layers = geojson.getLayers();
+
+//     for (var i = 0; i < layers.length; i++){
+//         if (layers[i].feature.properties.name === stateName){
+//             var layer = layers[i];
+
+//             layer.setStyle({
+//                 weight: 7,
+//                 color: 'darkgreen',
+//                 dashArray: '',
+//                 fillOpacity: 0.7
+//             });
+//             if(!L.Browser.ie && !L.Browser.opera && !L.Browser.edge){
+//                 layer.bringToFront();
+//             }
+
+//         }
+//     }
+// }
+
+function triggerMapReset(stateName) {
+  var layers = geojson.getLayers();
+  for (var i = 0; i < layers.length; i++) {
+    if (layers[i].feature.properties.name === stateName) {
+      var layer = layers[i];
+      geojson.resetStyle(layer);
+    }
+  }
+}
+
+function highlightFeature(e) {
+  var layer = e.target;
+
+  layer.setStyle({
+    weight: 5,
+    color: '#666',
+    dashArray: '',
+    fillOpacity: 0.7
+  });
+
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    layer.bringToFront();
+  }
+}
+
+
+function resetHighlight(e) {
+  geojson.resetStyle(e.target);
+
+}
+
+function zoomToFeature(e) {
+  map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature(feature, layer) {
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight,
+    click: zoomToFeature
+  });
+}
 
