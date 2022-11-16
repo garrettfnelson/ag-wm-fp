@@ -1,13 +1,11 @@
 // "use strict";
 
-var geojson;
+var geoJsonLayer;
 var map;
 var info = L.control();
 
 window.onload = function () {
   renderMap();
-  //addLayers();
-  //style(feature);
 }
 
 function renderMap() {
@@ -19,31 +17,13 @@ function renderMap() {
     maxZoom: 16
   }).addTo(map);
 
-  L.geoJSON(countyBoundaries, {
-    //filter: filterCounties
+  geoJsonLayer = L.geoJSON(countyBoundaries, {
     style: style,
-    onEachFeature: onEachFeature
-  }).addTo(map);
-
+    onEachFeature: onEachFeature,
+}).addTo(map);
 }
 
-// function filterCounties(){
-//   for (i=0; i<countyBoundaries.length; i++){
-//     let jsonCountyName = countyBoundaries.features.properties.COUNTY_NAME;
-//     console.log(jsonCountyName);
-//     let csvCountyName = counties.features.properties.County;
-//     for(j=0; i<counties.length; i++){
-//       if(jsonCountyName[i] === csvCountyName[j]){
-//         jsonCountyName.clearLayers();
-//       }
-//       else{ 
-//         return true;
-//       }
-//     }
-//   }
-// };
-
-function style(feature) {
+function style(){
   return {
     weight: 2,
     opacity: 1,
@@ -53,6 +33,7 @@ function style(feature) {
     fillColor: 'rgb(132,54,64)'
   };
 }
+
 function triggerMapHighlight(stateName) {
   var layers = geojson.getLayers();
 
@@ -73,27 +54,6 @@ function triggerMapHighlight(stateName) {
   }
 }
 
-// function triggerMapClick(stateName){
-//     var layers = geojson.getLayers();
-
-//     for (var i = 0; i < layers.length; i++){
-//         if (layers[i].feature.properties.name === stateName){
-//             var layer = layers[i];
-
-//             layer.setStyle({
-//                 weight: 7,
-//                 color: 'darkgreen',
-//                 dashArray: '',
-//                 fillOpacity: 0.7
-//             });
-//             if(!L.Browser.ie && !L.Browser.opera && !L.Browser.edge){
-//                 layer.bringToFront();
-//             }
-
-//         }
-//     }
-// }
-
 function triggerMapReset(stateName) {
   var layers = geojson.getLayers();
   for (var i = 0; i < layers.length; i++) {
@@ -109,9 +69,10 @@ function highlightFeature(e) {
 
   layer.setStyle({
     weight: 5,
-    color: '#666',
+    color: 'rgb(45,18,22)',
     dashArray: '',
-    fillOpacity: 0.7
+    fillColor: 'rgb(96,40,46)',
+    fillOpacity: 1
   });
 
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -121,19 +82,21 @@ function highlightFeature(e) {
 
 
 function resetHighlight(e) {
-  geojson.resetStyle(e.target);
+  geoJsonLayer.resetStyle(e.target);
 
 }
 
-function zoomToFeature(e) {
-  map.fitBounds(e.target.getBounds());
+function click(c){
+  if (c.properties && c.properties.COUNTY_NAME){
+    layer.bindPopup("County: " + c.properties.COUNTY_NAME);
+  }
 }
 
 function onEachFeature(feature, layer) {
   layer.on({
     mouseover: highlightFeature,
     mouseout: resetHighlight,
-    click: zoomToFeature
+    click: click
   });
 }
 
