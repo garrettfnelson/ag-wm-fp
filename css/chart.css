@@ -1,8 +1,8 @@
-body {
+/* body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
+} */
 
-div#chart {
+div#chart2 {
   float: right;
   border: medium solid #999;
   margin: 10px 10px 5px 10px;
@@ -11,7 +11,7 @@ div#chart {
   height: 600px;
 }
 
-.tooltip {
+/* .tooltip {
   position: absolute;
   border: solid;
   border-width: 2px;
@@ -24,4 +24,4 @@ div#chart {
   position: static;
   border: 2px solid skyblue;
   border-radius: 8px;
-}
+} */
