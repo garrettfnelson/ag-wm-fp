@@ -14,13 +14,21 @@ let svg = d3
   .attr('id', 'plot-area')
   .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')')
 
+// we want this to read our data instead
+// d3.csv("/data/california_wine_production.csv", function(data) {
+//   // create function to be run as soon as the csv data is loaded
+//   console.log(data[0].County);
+
+// });
+
 // read the data, then draw the graph
+// example data is read in, bottom to top, column #, row #, cell value
 d3.csv(
   'https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv'
 ).then(draw)
 
 function draw(data) {
-  console.log(data)
+  // console.log(data) // console log of old data
   // labels of row and columns -> unique identifier of the column called 'group' and 'variable'
   var groups = d3.map(data, d => d.group).keys()
   var vars = d3.map(data, d => d.variable).keys()
