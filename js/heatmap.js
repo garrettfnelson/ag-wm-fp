@@ -1,9 +1,9 @@
 // Margin Convention
-let margins = { top: 20, right: 25, bottom: 30, left: 40 }
-let outerWidth = 450
-let outerHeight = 450
-let innerWidth = 450 - margins.left - margins.right
-let innerHeight = 450 - margins.top - margins.bottom
+let margins = { top: 20, right: 25, bottom: 30, left: 100 }
+let outerWidth = 600
+let outerHeight = 600
+let innerWidth = 600 - margins.left - margins.right
+let innerHeight = 600 - margins.top - margins.bottom
 
 // append the svg object to the body of the page
 let svg = d3
@@ -14,14 +14,16 @@ let svg = d3
   .attr('id', 'plot-area')
   .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')')
 
-// we want this to read our data instead
-// d3.csv("/data/california_wine_production.csv", function(data) {
-//   // create function to be run as soon as the csv data is loaded
-//   console.log(data[0].County);
+// data fully loaded from github raw view
+d3.csv(
+  'https://raw.githubusercontent.com/garrettfnelson/ag-wm-fp/main/data/californa_wine_production.csv?token=GHSAT0AAAAAAB2MSVB7NYXHLC3QQKIQIXMAY4ADMDQ'
+).then(message)
 
-// });
+function message(data) {
+  console.log("data successfully loaded")
+}
 
-// read the data, then draw the graph
+// read the data, then draw the graphs
 // example data is read in, bottom to top, column #, row #, cell value
 d3.csv(
   'https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv'
@@ -32,6 +34,8 @@ function draw(data) {
   // labels of row and columns -> unique identifier of the column called 'group' and 'variable'
   var groups = d3.map(data, d => d.group).keys()
   var vars = d3.map(data, d => d.variable).keys()
+
+  
 
   // build x scale and axis:
   var xScale = d3
