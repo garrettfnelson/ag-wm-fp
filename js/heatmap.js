@@ -1,5 +1,5 @@
 // Margin Convention
-let margins = { top: 20, right: 25, bottom: 30, left: 100 }
+let margins = { top: 20, right: 25, bottom: 30, left: 115 }
 let outerWidth = 600
 let outerHeight = 600
 let innerWidth = 600 - margins.left - margins.right
@@ -14,28 +14,21 @@ let svg = d3
   .attr('id', 'plot-area')
   .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')')
 
-// data fully loaded from github raw view
-// replace only the URL inside the ``
-d3.csv(`
-
-https://raw.githubusercontent.com/garrettfnelson/ag-wm-fp/main/data/californa_wine_production.csv?token=GHSAT0AAAAAAB2MSVB6HNWOYXKWEASZOFS4Y4CGUYA
-
-`).then(draw_wine)
-
-function message(data) {
-  console.log("data successfully loaded")
-}
+// data fully loaded from data folder
+d3.csv("data/california_wine_production.csv").then(draw_wine)
 
 function draw_wine(data) {
-  // console.log(data) // console log of old data
   // labels of row and columns -> unique identifier of the column called 'group' and 'variable'
+  // checking data validity
+  // console.log(data[0].County)
+
   var county = d3.map(data, d => d.County).keys()
   var year = d3.map(data, d => d.Year).keys()
 
   // build x scale and axis:
   var xScale = d3
     .scaleBand()
-    .domain(county)
+    .domain(year)
     .range([0, innerWidth])
     .padding(0.1)
 
@@ -50,7 +43,7 @@ function draw_wine(data) {
   // Build y scale and axis:
   var yScale = d3
     .scaleBand()
-    .domain(year)
+    .domain(county)
     .range([innerHeight, 0])
     .padding(0.05)
 
@@ -73,8 +66,8 @@ function draw_wine(data) {
     .data(data)
     .enter()
     .append('rect')
-    .attr('x', d => xScale(d.County))
-    .attr('y', d => yScale(d.Year))
+    .attr('x', d => xScale(d.Year))
+    .attr('y', d => yScale(d.County))
     .attr('rx', 4)
     .attr('ry', 4)
     .attr('width', xScale.bandwidth())
@@ -103,8 +96,8 @@ function draw_wine(data) {
       .style('fill-opacity', 1)
       .style('stroke-opacity', 1)
       // shrink a bit to make room for stroke, now visible
-      .attr('x', d => xScale(d.County) + 2)
-      .attr('y', d => yScale(d.Year) + 2)
+      .attr('x', d => xScale(d.Year) + 2)
+      .attr('y', d => yScale(d.County) + 2)
       .attr('width', xScale.bandwidth() - 4)
       .attr('height', yScale.bandwidth() - 4)
   }
@@ -283,3 +276,11 @@ function reset_highlight(d, ref) {
     target.style('stroke', color == 'red' ? 'blue' : 'red')
   }
 }
+
+/*
+checklist: [ ]/[x]
+1. x/y bounds switched w/ appropriate labels                    [x]
+2. load data from non-expiry source                             [x]   
+3. mouseover highlight in-front of data + appropriate sizing    [ ]
+4. change sizing based on additional variable                   [ ]
+*/
