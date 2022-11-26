@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" /> 
     <title>AG&WM Final Project - Draft</title>
+    <header>Matrix Display of California Wineries</header>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="./css/map.css">
@@ -13,7 +14,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.0/dist/leaflet.css">
 
     <!-- scripts -->
-    <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
     <script type="text/javascript" src="https://unpkg.com/leaflet@1.7.0/dist/leaflet.js"></script>
     <script type="text/javascript" src="./data/california_county_boundaries.js"></script>
     <script type="text/javascript" src="./data/california_wine_production.js"></script>
@@ -22,12 +23,8 @@
 </head>
 
 <body>
+    <div id="chart"></div>
     <div id="map"></div>
-    <div id="chart">
-        <div class="tooltip"></div>
-        <svg></svg>
-      </div>
-    <div class="info"></div>
 
     <script type="text/javascript" src="js/heatmap.js"></script>
 </body>
