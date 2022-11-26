@@ -7,7 +7,7 @@ let innerHeight = 600 - margins.top - margins.bottom
 
 // append the svg object to the body of the page
 let svg = d3
-  .select('div#graph svg')
+  .select('div#chart svg')
   .attr('width', outerWidth)
   .attr('height', outerHeight)
   .append('g')
@@ -16,32 +16,23 @@ let svg = d3
 
 // data fully loaded from github raw view
 d3.csv(
-  'https://raw.githubusercontent.com/garrettfnelson/ag-wm-fp/main/data/californa_wine_production.csv?token=GHSAT0AAAAAAB2MSVB7NYXHLC3QQKIQIXMAY4ADMDQ'
-).then(message)
+  'https://raw.githubusercontent.com/garrettfnelson/ag-wm-fp/main/data/californa_wine_production.csv?token=GHSAT0AAAAAAB2MSVB64FUHNONRPR46JT5QY4BRSSQ'
+).then(draw_wine)
 
 function message(data) {
   console.log("data successfully loaded")
 }
 
-// read the data, then draw the graphs
-// example data is read in, bottom to top, column #, row #, cell value
-// d3.csv(
-//   'https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv'
-// ).then(draw)
-
 function draw_wine(data) {
   // console.log(data) // console log of old data
   // labels of row and columns -> unique identifier of the column called 'group' and 'variable'
-  var groups = d3.map(data, d => d.group).keys()
-  var vars = d3.map(data, d => d.variable).keys()
-
   var county = d3.map(data, d => d.County).keys()
   var year = d3.map(data, d => d.Year).keys()
-
+  
   // build x scale and axis:
   var xScale = d3
     .scaleBand()
-    .domain(groups)
+    .domain(county)
     .range([0, innerWidth])
     .padding(0.1)
 
@@ -56,7 +47,7 @@ function draw_wine(data) {
   // Build y scale and axis:
   var yScale = d3
     .scaleBand()
-    .domain(vars)
+    .domain(year)
     .range([innerHeight, 0])
     .padding(0.05)
 
@@ -79,13 +70,13 @@ function draw_wine(data) {
     .data(data)
     .enter()
     .append('rect')
-    .attr('x', d => xScale(d.group))
-    .attr('y', d => yScale(d.variable))
+    .attr('x', d => xScale(d.County))
+    .attr('y', d => yScale(d.Year))
     .attr('rx', 4)
     .attr('ry', 4)
     .attr('width', xScale.bandwidth())
     .attr('height', yScale.bandwidth())
-    .style('fill', d => colorScale(d.value))
+    .style('fill', d => colorScale(d.HarvestedAcres))
     .style('stroke', 'red')
     .style('stroke-width', 4)
     .style('stroke-opacity', 0)
@@ -109,8 +100,8 @@ function draw_wine(data) {
       .style('fill-opacity', 1)
       .style('stroke-opacity', 1)
       // shrink a bit to make room for stroke, now visible
-      .attr('x', d => xScale(d.group) + 2)
-      .attr('y', d => yScale(d.variable) + 2)
+      .attr('x', d => xScale(d.County) + 2)
+      .attr('y', d => yScale(d.Year) + 2)
       .attr('width', xScale.bandwidth() - 4)
       .attr('height', yScale.bandwidth() - 4)
   }
@@ -118,13 +109,14 @@ function draw_wine(data) {
   function show_info(d) {
     let mouseLoc = d3.mouse(this)
     let info =
-      'The exact value of this cell is: ' +
-      d.value +
+      'cell value: ' +
+      d.HarvestedAcres +
       '. ' +
-      '<br />Mouse location is: (' +
-      mouseLoc[0] +
+      '<br />county: ' +
+      d.County +
       ', ' +
-      mouseLoc[1] +
+      '<br />year:' +
+      d.Year +
       ').'
 
     // .html instead of .text() allows us to supply html markup here
