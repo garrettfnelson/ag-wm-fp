@@ -15,9 +15,12 @@ let svg = d3
   .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')')
 
 // data fully loaded from github raw view
-d3.csv(
-  'https://raw.githubusercontent.com/garrettfnelson/ag-wm-fp/main/data/californa_wine_production.csv?token=GHSAT0AAAAAAB2MSVB64FUHNONRPR46JT5QY4BRSSQ'
-).then(draw_wine)
+// replace only the URL inside the ``
+d3.csv(`
+
+https://raw.githubusercontent.com/garrettfnelson/ag-wm-fp/main/data/californa_wine_production.csv?token=GHSAT0AAAAAAB2MSVB6HNWOYXKWEASZOFS4Y4CGUYA
+
+`).then(draw_wine)
 
 function message(data) {
   console.log("data successfully loaded")
@@ -28,7 +31,7 @@ function draw_wine(data) {
   // labels of row and columns -> unique identifier of the column called 'group' and 'variable'
   var county = d3.map(data, d => d.County).keys()
   var year = d3.map(data, d => d.Year).keys()
-  
+
   // build x scale and axis:
   var xScale = d3
     .scaleBand()
