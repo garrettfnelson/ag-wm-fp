@@ -7,8 +7,8 @@ div#chart {
   height: 600px;
 }
 
-/* .tooltip {
-  position: absolute;
+.tooltip {
+  position: static;
   border: solid;
   border-width: 2px;
   border-radius: 5px;
@@ -24,4 +24,4 @@ div#chart {
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-} */
+}

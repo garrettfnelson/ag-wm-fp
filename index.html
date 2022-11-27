@@ -32,36 +32,44 @@
 
     <div id="map"></div>
 
-    <div id="chart" class="chart">
-        <label for="data"> Choose data view:</label>
-        <select id="data">
-            <option value="chart1">Harvested Acres</option>
-            <option value="chart2">Yield (Unit/Acre)</option>
-            <option value="chart3">Production</option>
-            <option value="chart4">Price (Dollars/Unit)</option>
-        </select>
+    <button id='chart1' data-div="sel_chart1">Harvested Acres</button>
+    <button id='chart2' data-div="sel_chart2">Yield (Unit/Acre)</button>
+    <button id='chart3' data-div="sel_chart3">Production</button>
+
+    <div class="row" id="sel_chart1">
+        <div class="col-md-4" id="c1">
+            <p>Harvested Acres</p>
+        </div>
+    </div>
+    
+    <div class="row" id="sel_chart2">
+        <div class="col-md-4" id="c2">
+            <p>Yield (Unit/Acre)</p>
+        </div>
+    </div>
+    
+    <div class="row" id="sel_chart3">
+        <div class="col-md-4" id="c3">
+            <p>Production</p>
+        </div>
     </div>
 
-    <script type="text/javascript" src="js/chart.js"></script>
-
     <script>
-        document
-            .getElementById('data')
-            .addEventListener('change', function () {
-                    'use strict';
-                var e = document.getElementById("data");
-                var value = e.value;
-                var text = e.options[e.selectedIndex].text;
-                console.log(text)
+        $(function () {
 
-                if (text == 'Harvested Acres') {
+            $('[id^=sel_chart]').hide();
 
-                }
-                if (text == 'Yield (Unit/Acre)') {
-                  
-                }
+            $('[id^=chart]').click(function() {
+                var currDiv = this.getAttribute('data-div');
+                $('div.row:not(#' + currDiv + ')').hide();
+                $('#' + currDiv).toggle();
+            });
             });
     </script>
+
+    <script type="text/javascript" src="./js/chart1.js"></script>
+    <script type="text/javascript" src="./js/chart2.js"></script>
+    <script type="text/javascript" src="./js/chart3.js"></script>
 
 </body>
 
