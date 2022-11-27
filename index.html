@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>AG&WM Final Project - Draft</title>
-    <header>Matrix Display of California Wineries</header>
+    <header>Matrix Display of California Wineries Data</header>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="./css/map.css">
@@ -32,7 +32,7 @@
 
     <div id="map"></div>
 
-    <div id="chart" class="chart">Harvested Acres
+    <div id="chart" class="chart">
         <label for="data"> Choose data view:</label>
         <select id="data">
             <option value="chart1">Harvested Acres</option>
@@ -48,136 +48,19 @@
         document
             .getElementById('data')
             .addEventListener('change', function () {
-                'use strict';
-                    var vis = document.querySelector('.vis'),   
-                    target = $("select#data").filter(":selected").val();
-                    console.log(target)
-                if (target == 'chart1') {
-                    console.log("CHART1)")
-                    myColor = d3
-                        .scaleSequential()
-                        // .interpolator(d3.interpolateInferno)
-                        // .domain([1,100])
-                        .interpolator(d3.interpolateRgb("green", "darkred"))
-                        .domain([500, 25000])
+                    'use strict';
+                var e = document.getElementById("data");
+                var value = e.value;
+                var text = e.options[e.selectedIndex].text;
+                console.log(text)
 
-                    // create a tooltip
-                    tooltip = d3.select("#chart")
-                        .append("div")
-                        .style("opacity", 0)
-                        .attr("class", "tooltip")
-                        .style("background-color", "white")
-                        .style("border", "solid")
-                        .style("border-width", "2px")
-                        .style("border-radius", "5px")
-                        .style("padding", "5px")  
+                if (text == 'Harvested Acres') {
 
-                        mouseover = function(event,d) {
-                    tooltip
-                            .style("opacity", 1)
-                        d3.select(this)
-                            .style("stroke", "black")
-                            .style("opacity", 1)
-                            .attr("width", x.bandwidth)
-                            .attr("height", y.bandwidth)
-                        }
-
-                        mouseleave = function(event,d) {
-                    tooltip
-                            .style("opacity", 0)
-                        d3.select(this)
-                            .style("stroke", "none")
-                            .style("opacity", 0.8)
-                        }
-
-                        mousemove = function(event,d) {
-                    tooltip
-                            .html(d.County + " County harvested " + d.HarvestedAcres + "<br>acres " +  d.Year + ".")
-                            .style("left", (event.x)/2 + "px")
-                            .style("top", (event.y)/2 + "px")
-                        }
-                    // add the squares
-                    svg.selectAll()
-                        .data(data, function(d) {return d.County+':'+d.Year;})
-                        .join("rect")
-                        .attr("x", function(d) { return x(d.Year) })
-                        .attr("y", function(d) { return y(d.County) })
-                        .attr("rx", 4)
-                        .attr("ry", 4)
-                        .attr("width", x.bandwidth() )
-                        .attr("height", y.bandwidth() )
-                        .style("fill", function(d) { return myColor(d.HarvestedAcres)} )
-                        .style("stroke-width", 4)
-                        .style("stroke", "none")
-                        .style("opacity", 0.8)
-                        .on("mouseover", mouseover)
-                        .on("mousemove", mousemove)
-                        .on("mouseleave", mouseleave)
                 }
-                if (target == 'chart2' ) {
-                    console.log("CHANGE")
-                    myColor = d3
-                    .scaleSequential()
-                    // .interpolator(d3.interpolateInferno)
-                    // .domain([1,100])
-                    .interpolator(d3.interpolateRgb("green", "darkred"))
-                    .domain([1, 5])
-
-                    // create a tooltip
-                    tooltip2 = d3.select("#chart")
-                        .append("div")
-                        .style("opacity", 0)
-                        .attr("class", "tooltip")
-                        .style("background-color", "white")
-                        .style("border", "solid")
-                        .style("border-width", "2px")
-                        .style("border-radius", "5px")
-                        .style("padding", "5px")  
-
-                    mouseover2 = function(event,d) {
-                    tooltip2
-                        .style("opacity", 1)
-                    d3.select(this)
-                        .style("stroke", "black")
-                        .style("opacity", 1)
-                        .attr("width", x.bandwidth)
-                        .attr("height", y.bandwidth)
-                    }
-
-                    mouseleave2 = function(event,d) {
-                    tooltip2
-                        .style("opacity", 0)
-                    d3.select(this)
-                        .style("stroke", "none")
-                        .style("opacity", 0.8)
-                    }
-
-                    mousemove2 = function(event,d) {
-                    tooltip
-                        .html(d.County + " County yielded " + d.YieldUnitAcres + "<br>units/acre in " +  d.Year + ".")
-                        .style("left", (event.x)/2 + "px")
-                        .style("top", (event.y)/2 + "px")
-                    }
-
-                    // add the squares
-                    svg.selectAll()
-                        .data(data, function(d) {return d.County+':'+d.Year;})
-                        .join("rect")
-                        .attr("x", function(d) { return x(d.Year) })
-                        .attr("y", function(d) { return y(d.County) })
-                        .attr("rx", 4)
-                        .attr("ry", 4)
-                        .attr("width", x.bandwidth() )
-                        .attr("height", y.bandwidth() )
-                        .style("fill", function(d) { return myColor(d.YieldUnitAcres)} )
-                        .style("stroke-width", 4)
-                        .style("stroke", "none")
-                        .style("opacity", 0.8)
-                        .on("mouseover", mouseover2)
-                        .on("mousemove", mousemove2)
-                        .on("mouseleave", mouseleav2)
+                if (text == 'Yield (Unit/Acre)') {
+                  
                 }
-        });
+            });
     </script>
 
 </body>

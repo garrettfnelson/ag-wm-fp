@@ -79,14 +79,14 @@ function draw1(data){
 
     mousemove = function(event,d) {
       tooltip
-        .html(d.County + " County harvested " + d.HarvestedAcres + "<br>acres " +  d.Year + ".")
+        .html(d.County + " County harvested " + d.HarvestedAcres + " acres in " +  d.Year + ".")
         .style("left", (event.x)/2 + "px")
         .style("top", (event.y)/2 + "px")
     }
   // add the squares
-  svg.selectAll()
-    .data(data, function(d) {return d.County+':'+d.Year;})
-    .join("rect")
+    svg.selectAll()
+      .data(data, function(d) {return d.County+':'+d.Year;})
+      .join("rect")
       .attr("x", function(d) { return x(d.Year) })
       .attr("y", function(d) { return y(d.County) })
       .attr("rx", 4)

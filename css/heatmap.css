@@ -1,3 +1,4 @@
+
 div#chart {
   float: right;
   border: medium solid #999;
@@ -5,8 +6,6 @@ div#chart {
   width: 48%;
   height: 600px;
 }
-
-
 
 /* .tooltip {
   position: absolute;
