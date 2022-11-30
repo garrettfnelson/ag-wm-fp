@@ -35,10 +35,10 @@ function style(){
 }
 
 function triggerMapHighlight(stateName) {
-  var layers = geojson.getLayers();
+  var layers = geoJsonLayer.getLayers();
 
   for (var i = 0; i < layers.length; i++) {
-    if (layers[i].feature.properties.name === stateName) {
+    if (layers[i].feature.properties.COUNTY_NAME === stateName) {
       var layer = layers[i];
 
       layer.setStyle({
@@ -55,9 +55,9 @@ function triggerMapHighlight(stateName) {
 }
 
 function triggerMapReset(stateName) {
-  var layers = geojson.getLayers();
+  var layers = geoJsonLayer.getLayers();
   for (var i = 0; i < layers.length; i++) {
-    if (layers[i].feature.properties.name === stateName) {
+    if (layers[i].feature.properties.COUNTY_NAMEs === stateName) {
       var layer = layers[i];
       geojson.resetStyle(layer);
     }
@@ -98,5 +98,6 @@ function onEachFeature(feature, layer) {
     mouseout: resetHighlight,
     click: click
   });
+
 }
 
