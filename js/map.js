@@ -80,7 +80,7 @@ function triggerMapReset(stateName) {
   }
 }
 
-function highlightFeature(e) {
+function highlightFeature(e, data) {
   var layer = e.target;
 
   layer.setStyle({
@@ -91,14 +91,22 @@ function highlightFeature(e) {
     fillOpacity: 1
   });
 
+  console.log('Here is where we highlight the chart')
+
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
     layer.bringToFront();
   }
 }
 
 
-function resetHighlight(e) {
+function resetHighlight(e, data) {
   geojson.resetStyle(e.target);
+
+  var layer = e.target; 
+
+  console.log('Here is where we reset the chart')
+
+
 
 }
 
