@@ -1,6 +1,7 @@
 // "use strict";
 
 var geoJsonLayer;
+var unwanted;
 var map;
 var info = L.control();
 
@@ -21,7 +22,11 @@ function renderMap() {
     style: style,
     onEachFeature: onEachFeature,
 }).addTo(map);
-}
+
+  unwanted = L.geoJSON(unwantedBoundaries, {
+    style: unwantedStyle,
+  }).addTo(map);
+};
 
 function style(){
   return {
@@ -32,6 +37,17 @@ function style(){
     fillOpacity: 1,
     fillColor: 'rgb(132,54,64)'
   };
+}
+
+function unwantedStyle(){
+  return {
+    weight: 2,
+    opacity: 1,
+    color: 'white',
+    //dashArray: '3',
+    fillOpacity: 1,
+    fillColor: 'grey'
+  }
 }
 
 function triggerMapHighlight(stateName) {
