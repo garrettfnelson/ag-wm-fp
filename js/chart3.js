@@ -70,6 +70,8 @@ function draw3(data){
         .style("opacity", 1)
         .attr("width", x.bandwidth)
         .attr("height", y3.bandwidth)
+
+        triggerMapHighlight(d.County)
     }
 
     mouseleave3 = function(event,d) {
@@ -78,6 +80,8 @@ function draw3(data){
       d3.select(this)
         .style("stroke", "none")
         .style("opacity", 0.8)
+
+        triggerMapReset(d.County)
     }
 
     mousemove3 = function(event,d) {
