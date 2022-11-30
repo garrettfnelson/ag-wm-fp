@@ -17,7 +17,7 @@ function renderMap() {
     maxZoom: 16
   }).addTo(map);
 
-  geoJsonLayer = L.geoJSON(countyBoundaries, {
+  geojson = L.geoJSON(countyBoundaries, {
     style: style,
     onEachFeature: onEachFeature,
 }).addTo(map);
@@ -35,7 +35,7 @@ function style(){
 }
 
 function triggerMapHighlight(stateName) {
-  var layers = geoJsonLayer.getLayers();
+  var layers = geojson.getLayers();
 
   for (var i = 0; i < layers.length; i++) {
     if (layers[i].feature.properties.COUNTY_NAME === stateName) {
@@ -55,9 +55,9 @@ function triggerMapHighlight(stateName) {
 }
 
 function triggerMapReset(stateName) {
-  var layers = geoJsonLayer.getLayers();
+  var layers = geojson.getLayers();
   for (var i = 0; i < layers.length; i++) {
-    if (layers[i].feature.properties.COUNTY_NAMEs === stateName) {
+    if (layers[i].feature.properties.COUNTY_NAME === stateName) {
       var layer = layers[i];
       geojson.resetStyle(layer);
     }
@@ -82,7 +82,7 @@ function highlightFeature(e) {
 
 
 function resetHighlight(e) {
-  geoJsonLayer.resetStyle(e.target);
+  geojson.resetStyle(e.target);
 
 }
 
