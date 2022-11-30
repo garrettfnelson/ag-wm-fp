@@ -40,13 +40,16 @@ function draw3(data){
     .call(d3.axisLeft(y3).tickSize(0))
     .select(".domain").remove()
 
+
   // Build color scale
   myColor3 = d3
     .scaleSequential()
+    .domain([23.0, 1040100.0])
     // .interpolator(d3.interpolateInferno)
     // .domain([1,100])
-    .interpolator(d3.interpolateRgb("lightblue", "blue"))
-    .domain([1000, 25000])
+    .interpolator(d3.interpolateRgb("rgb(242, 237, 237)", "rgb(132,54,64)"))
+  
+    
 
   // create a tooltip
   tooltip3 = d3.select("#c3")

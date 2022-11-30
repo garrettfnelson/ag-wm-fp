@@ -56,8 +56,8 @@ function draw1(data){
     .scaleSequential()
     // .interpolator(d3.interpolateInferno)
     // .domain([1,100])
-    .interpolator(d3.interpolateRgb("lightblue", "blue"))
-    .domain([1000, 20000])
+    .interpolator(d3.interpolateRgb("rgb(242, 237, 237)", "rgb(132,54,64)"))
+    .domain([3.0, 128613.0])
 
   // create a tooltip
   tooltip1 = d3.select("#c1")
