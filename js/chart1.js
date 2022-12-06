@@ -119,6 +119,33 @@ function draw1(data){
 
 }
 
+function highlightChart(stateName){
+  // myCounty is an array of county names made into a key
+  for (var i = 0; i < myCounty.length; i++){
+    if(myCounty[i] === stateName){
+      // when we get a match we want to highlight that particular row corresponding to the key
+      svg1.append("g")
+        .style("color", "Red")
+        .style("font-size", 15)
+        .call(d3.axisLeft(y1).tickSize(0))
+        .select(".domain").remove()
+    }
+  }
+}
+
+function resetChart(stateName){
+  for (var i = 0; i < myCounty.length; i++){
+    if(myCounty[i] === stateName){
+      // reverse highlight
+      svg1.append("g")
+      .style("color", "Black")
+      .style("font-size", 15)
+      .call(d3.axisLeft(y1).tickSize(0))
+      .select(".domain").remove()
+    }
+  }
+}
+
 // // Add title to graph
 // svg.append("title")
 //         .attr("x", 0)

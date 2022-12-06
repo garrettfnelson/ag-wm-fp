@@ -91,7 +91,7 @@ function highlightFeature(e, data) {
     fillOpacity: 1
   });
 
-  console.log('Here is where we highlight the chart')
+  highlightChart(layer.feature.properties.COUNTY_NAME)
 
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
     layer.bringToFront();
@@ -104,9 +104,7 @@ function resetHighlight(e, data) {
 
   var layer = e.target; 
 
-  console.log('Here is where we reset the chart')
-
-
+  resetChart(layer.feature.properties.COUNTY_NAME)
 
 }
 
