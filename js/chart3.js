@@ -44,7 +44,7 @@ function draw3(data){
   // Build color scale
   myColor3 = d3
     .scaleSequential()
-    .domain([23.0, 1040100.0])
+    .domain([100, 2000])
     // .interpolator(d3.interpolateInferno)
     // .domain([1,100])
     .interpolator(d3.interpolateRgb("rgb(242, 237, 237)", "rgb(132,54,64)"))
@@ -86,7 +86,7 @@ function draw3(data){
 
     mousemove3 = function(event,d) {
       tooltip3
-        .html(d.County + " County produced " + d.Production + " total units in " +  d.Year + ".")
+        .html(d.County + " County priced each ton of yield at " + d.PriceDollarsUnit + " $/Unit in " +  d.Year + ".")
         .style("left", (event.x3)/2 + "px")
         .style("top", (event.y3)/2 + "px")
     }
@@ -100,7 +100,7 @@ function draw3(data){
       .attr("ry", 4)
       .attr("width", x3.bandwidth() )
       .attr("height", y3.bandwidth() )
-      .style("fill", function(d) { return myColor3(d.Production)} )
+      .style("fill", function(d) { return myColor3(d.PriceDollarsUnit)} )
       .style("stroke-width", 4)
       .style("stroke", "none")
       .style("opacity", 0.8)
