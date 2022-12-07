@@ -47,7 +47,7 @@ function draw2(data){
     // .interpolator(d3.interpolateInferno)
     // .domain([1,100])
     .interpolator(d3.interpolateRgb("rgb(242, 237, 237)", "rgb(132,54,64)"))
-    .domain([0.06, 25.0])
+    .domain([0.06, 10.0])
 
   // create a tooltip
   tooltip2 = d3.select("#c2")
