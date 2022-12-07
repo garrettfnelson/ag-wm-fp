@@ -20,12 +20,12 @@
   background-color: white;
 }
 
-.info {
-  position: static;
-  border: 2px solid skyblue;
-  border-radius: 8px;
-}
-
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+/* .info {
+  position: static;
+  border: 2px solid skyblue;
+  border-radius: 8px;
+} */

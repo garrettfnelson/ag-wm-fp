@@ -26,6 +26,8 @@ function renderMap() {
   unwanted = L.geoJSON(unwantedBoundaries, {
     style: unwantedStyle,
   }).addTo(map);
+
+  info.addTo(map);
 };
 
 function style(){
@@ -65,6 +67,8 @@ function triggerMapHighlight(stateName) {
       });
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
+
+        info.update(layer.feature.properties.COUNTY_NAME);
       }
     }
   }
@@ -76,6 +80,7 @@ function triggerMapReset(stateName) {
     if (layers[i].feature.properties.COUNTY_NAME === stateName) {
       var layer = layers[i];
       geojson.resetStyle(layer);
+      info.update()
     }
   }
 }
@@ -91,11 +96,14 @@ function highlightFeature(e, data) {
     fillOpacity: 1
   });
 
-  highlightChart(layer.feature.properties.COUNTY_NAME)
+  // highlightChart(layer.feature.properties.COUNTY_NAME)
 
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
     layer.bringToFront();
   }
+
+  info.update(layer.feature.properties.COUNTY_NAME);
+
 }
 
 
@@ -104,7 +112,9 @@ function resetHighlight(e, data) {
 
   var layer = e.target; 
 
-  resetChart(layer.feature.properties.COUNTY_NAME)
+  info.update();
+
+  // resetChart(layer.feature.properties.COUNTY_NAME)
 
 }
 
@@ -122,4 +132,20 @@ function onEachFeature(feature, layer) {
   });
 
 }
+
+// info section of map
+
+info.onAdd = function (map) {
+  //"this" returns to info. 
+  this._div = L.DomUtil.create('div', 'info');
+  //the following line calls info.update(props) function. Again, this refers to 'info' here
+  this.update();
+  return this._div;
+};
+
+//Update the info based on what state user has clicked on
+info.update = function (stateName) {
+  console.log('print this function')
+  this._div.innerHTML = (stateName ? '<h4>This is ' + '<b>' + stateName + '</b>' + ' County<h4>' : '<h4>Select a County to View</h4>');
+};
 
