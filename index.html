@@ -5,12 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>AG&WM Final Project - Draft</title>
+    <title>California Wine Production</title>
     <!-- stylesheets -->
     <link rel="stylesheet" href="./css/map.css">
     <link rel="stylesheet" href="./css/chart.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.0/dist/leaflet.css">
+
+    <!-- about -->
+    <!-- <link href="./about.html"> -->
 
     <!-- scripts -->
     <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
@@ -20,7 +23,7 @@
     <script type="text/javascript" src="./data/unwantedBoundaries.js"></script>
     <script type="text/javascript" src="./lib/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="./js/map.js"></script>
-    
+
 </head>
 
 <style>
@@ -31,82 +34,30 @@
 
 <body>
 
-    <div id="intro">
+    <div class="header">
         <header>
             <h1>
                 <center>California Wine Production</center>
             </h1>
-            <style>
-                a:link{
-                    color: blue;
-                }
-                a:visited{
-                    color: purple;
-                }
-            </style>
-            <p>
-                This visualization displays a map of California Counties 
-                three matrices corresponding to amount of Harvest Acres, 
-                Yield (Unit/Acre), and average price from year 1980 to 2020. 
-                This visualization will allow you to explore different wine 
-                regions and differenciate how price and yield compare. 
-                          
-            </p>
-            <p>
-                First click on the matrix data you want to see. By hovering over 
-                each block (which indicates a year) of data, the designated county 
-                is highlighted on the map, while also providing specifics of that county at the bottom of the page. 
-                
-                Hovering over a county on the map highlights the area. When 
-                clicking on county, the matrix is highlighted with the county 
-                name. 
-                Simply move the mouse off of the data you want to reset everything.
-                
-                Here is a __insert link__
-                <!-- <a href=""
-                target="_blank"
-                >video tutorial</a>  -->
-                on how to use this visualization.
-            </p>
-            <p>
-                This visualization was created for GEOG-4043/5043 Advanced Geovisualization 
-                and Web Mapping taught by Professor Morteza Karimzadaeh at CU Boulder Fall 2022. 
-                Created by Garrett Nelson, Trent Sebastian, and Kaylee Sanderson. 
-                This app uses leaflet and d3 plugins. 
-                
-                The County Polygons were aquired from the 
-                <a href="https://gis.data.ca.gov/datasets/8713ced9b78a4abb97dc130a691a8695_0/explore?location=36.987120%2C-119.002032%2C6.00"
-                target="_blank"
-                >California State Geoportal</a>. 
-    
-                This data is a subset of 
-                <a href="https://www.kaggle.com/datasets/jarredpriester/california-wine-production-19802020" 
-                target="_blank"
-                >California Wine Production 1980-2020 from Kaggle</a>. 
-                
-            </p>
         </header>
+
+
+        <div class="w3-btn w3-round w3-button w3-border w3-hover-greyr" style="position: relative;
+        left: 10px; top: 43px">
+            <a href="./about.html">About</a>
+        </div>
     </div>
 
     <div id="map"></div>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <button id='chart1' 
-        class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
-        style="position: relative;
-        left: 110px; top:2px"
-        data-div="sel_chart1">Harvested Acres
+    <button id='chart1' class="w3-btn w3-round w3-button w3-border w3-hover-grey" style="position: relative;
+        left: 110px; top:2px" data-div="sel_chart1">Harvested Acres
     </button>
-    <button id='chart2' 
-        class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
-        style= "position: relative;
-        left:110px; top:2px"
-        data-div="sel_chart2">Yield (Unit/Acre)
+    <button id='chart2' class="w3-btn w3-round w3-button w3-border w3-hover-grey" style="position: relative;
+        left:110px; top:2px" data-div="sel_chart2">Yield (Unit/Acre)
     </button>
-    <button id='chart3' 
-        class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
-        style = "position: relative;
-        left:110px; top:2px"
-        data-div="sel_chart3">Price (Dollars/Unit)
+    <button id='chart3' class="w3-btn w3-round w3-button w3-border w3-hover-grey" style="position: relative;
+        left:110px; top:2px" data-div="sel_chart3">Price (Dollars/Unit)
     </button>
 
     <div class="row" id="sel_chart1">
@@ -114,13 +65,13 @@
             <!-- <p>Harvested Acres</p> -->
         </div>
     </div>
-    
+
     <div class="row" id="sel_chart2">
         <div class="col-md-4" id="c2">
             <!-- <p>Yield (Unit/Acre)</p> -->
         </div>
     </div>
-    
+
     <div class="row" id="sel_chart3">
         <div class="col-md-4" id="c3">
             <!-- <p>Production</p> -->
@@ -132,12 +83,12 @@
 
             $('[id^=sel_chart]').hide();
 
-            $('[id^=chart]').click(function() {
+            $('[id^=chart]').click(function () {
                 var currDiv = this.getAttribute('data-div');
                 $('div.row:not(#' + currDiv + ')').hide();
                 $('#' + currDiv).toggle();
             });
-            });
+        });
     </script>
 
     <!-- charts -->
@@ -153,14 +104,14 @@
 </html>
 
 <script>
-/*
-checklist: [ ]/[x]
-1. x/y bounds switched w/ appropriate labels                    [x]
-2. load data from non-expiry source                             [x]   
-3. mouseover highlight in-front of data + appropriate sizing    [ ] save for class w/ prof. morteza
-4. change sizing based on additional variable                   [ ]
-5. fix dehighlight function                                     [x]
-6. tooltip not displaying for first 3-4 entries per county      [x]
-7. switch bounds on years to extend left to right               [ ]
-*/
+    /*
+    checklist: [ ]/[x]
+    1. x/y bounds switched w/ appropriate labels                    [x]
+    2. load data from non-expiry source                             [x]   
+    3. mouseover highlight in-front of data + appropriate sizing    [ ] save for class w/ prof. morteza
+    4. change sizing based on additional variable                   [ ]
+    5. fix dehighlight function                                     [x]
+    6. tooltip not displaying for first 3-4 entries per county      [x]
+    7. switch bounds on years to extend left to right               [ ]
+    */
 </script>

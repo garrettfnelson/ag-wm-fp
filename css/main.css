@@ -1,3 +1,17 @@
 .h1{
     font-family: "Times New Roman", Times, serif;
 }
+.header h1{
+    font-family: "Times New Roman", Times, serif;
+}
+
+#intro {
+    float: center;
+    border: medium solid #999;
+    /* margin: 10px 10px 5px 10px; */
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    width: 48%;
+    height: 400px;
+  }
