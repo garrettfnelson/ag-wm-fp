@@ -32,10 +32,22 @@
 <body>
 
     <div id="map"></div>
-
-    <button id='chart1' data-div="sel_chart1">Harvested Acres</button>
-    <button id='chart2' data-div="sel_chart2">Yield (Unit/Acre)</button>
-    <button id='chart3' data-div="sel_chart3">Production</button>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <button id='chart1' 
+        class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
+        style="position: relative"
+        data-div="sel_chart1">Harvested Acres
+    </button>
+    <button id='chart2' 
+        class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
+        style= "position: relative"
+        data-div="sel_chart2">Yield (Unit/Acre)
+    </button>
+    <button id='chart3' 
+        class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
+        style = "position: right"
+        data-div="sel_chart3">Production
+    </button>
 
     <div class="row" id="sel_chart1">
         <div class="col-md-4" id="c1">
