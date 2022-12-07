@@ -6,7 +6,32 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>AG&WM Final Project - Draft</title>
-    <header>Matrix Display of California Wineries Data</header>
+    <header>
+        <h1>
+            California Wine Production
+        </h1>
+        <style>
+            a:link{
+                color: blue;
+            }
+            a:visited{
+                color: purple;
+            }
+        </style>
+        <p>
+            This visualization displays a map of California Counties 
+            three matrices corresponding to amount of Harvest Acres, 
+            Yield (Unit/Acre), and average price from year 1980 to 2020. 
+            This visualization will allow you to explore different wine 
+            regions and differenciate how price and yield compare. 
+            This data is a subset of 
+            <a href="https://www.kaggle.com/datasets/jarredpriester/california-wine-production-19802020" 
+            target="_blank"
+            >California Wine Production 1980-2020 from Kaggle</a>.
+            
+
+        </p>
+    </header>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="./css/map.css">
@@ -35,17 +60,20 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <button id='chart1' 
         class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
-        style="position: relative"
+        style="position: relative;
+        left: 110px; top:2px"
         data-div="sel_chart1">Harvested Acres
     </button>
     <button id='chart2' 
         class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
-        style= "position: relative"
+        style= "position: relative;
+        left:110px; top:2px"
         data-div="sel_chart2">Yield (Unit/Acre)
     </button>
     <button id='chart3' 
         class="w3-btn w3-round w3-button w3-border w3-hover-grey" 
-        style = "position: right"
+        style = "position: relative;
+        left:110px; top:2px"
         data-div="sel_chart3">Price (Dollars/Unit)
     </button>
 
