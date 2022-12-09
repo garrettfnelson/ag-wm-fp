@@ -119,34 +119,3 @@ function draw1(data) {
     .on("mouseleave", mouseleave1)
 
 }
-
-// function highlightChart(stateName) {
-//   // myCounty is an array of county names made into a key
-//       tooltip4
-//         .style("opacity", 1)
-//         .html("This is " + stateName + " County.")
-// }
-
-// function resetChart(stateName) {
-//       // reverse highlight
-//       tooltip
-//         .style("opacity", 0)
-// }
-
-// // Add title to graph
-// svg.append("title")
-//         .attr("x", 0)
-//         .attr("y", -50)
-//         .attr("text-anchor", "right")
-//         .style("font-size", "22px")
-//         .text("A d3.js heatmap");
-
-// // Add subtitle to graph
-// svg.append("text")
-//         .attr("x", 0)
-//         .attr("y", -20)
-//         .attr("text-anchor", "right")
-//         .style("font-size", "14px")
-//         .style("fill", "grey")
-//         .style("max-width", 400)
-//         .text("A short description of the take-away message of this chart.");
