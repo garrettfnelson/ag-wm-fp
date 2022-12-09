@@ -5,6 +5,22 @@ var unwanted;
 var map;
 var info = L.control();
 
+countyTotalValue = [354256600, 379886384, 57386400, 107282000,
+  64051000, 163407000, 6507842000, 1772000,
+  2935242000, 314806935, 1187655880, 4100983000,
+  15146100, 3090100, 2534797900, 1421099000, 216800,
+  5221558000, 14101751300, 44155300, 15431400, 304953200,
+  2857932000, 580184000, 39252600, 39252600, 9149106000, 4317046000,
+  16516000, 2639779783, 220256000, 81646000, 5125800, 428541500, 12265459372,
+  626424000, 3265000, 4265000, 1785545000, 1444071200, 2035648006]
+countyNames = ['Alameda', 'Amador', 'Calaveras', 'Colusa',
+'Contra Costa', 'El Dorado', 'Fresno', 'Glenn', 'Kern',
+'Kings', 'Lake', 'Madera', 'Marin', 'Mariposa', 'Mendocino',
+'Merced', 'Mono', 'Monterey', 'Napa', 'Nevada', 'Placer', 'Riverside', 
+'Sacramento', 'San Benito', 'San Bernardino', 'San Diego', 'San Joaquin',
+'San Luis Obispo', 'San Mateo', 'Santa Barbara', 'Santa Clara', 'Santa Cruz', 
+'Shasta', 'Solano', 'Sonoma', 'Stanislaus', 'Tehama', 'Trinity', 'Tulare', 'Yolo', 'Yuba']
+
 window.onload = function () {
   renderMap();
 }
@@ -30,18 +46,47 @@ function renderMap() {
   info.addTo(map);
 };
 
-function style() {
+function style(feature){
   return {
     weight: 2,
     opacity: 1,
     color: 'white',
     //dashArray: '3',
     fillOpacity: 1,
-    fillColor: 'rgb(132,54,64)'
+    fillColor: getColor(feature)
+    
   };
 };
 
-function unwantedStyle() {
+function getColor(feature) {
+
+  for (var i = 0; i < countyNames.length; i++) {
+
+    if(feature.properties.COUNTY_NAME == countyNames[i]) {
+          
+      if(countyTotalValue[i] > 11751495550) {
+        return '#843640';
+      }
+      else if(countyTotalValue[i] > 9401239800) {
+        return '#90474e';
+      }
+      else if(countyTotalValue[i] > 7050984050) {
+        return '#9d5b60';
+      }
+      else if(countyTotalValue[i] > 4700728300) {
+        return '#a96e72';
+      }
+      else if(countyTotalValue[i] > 2350472550) {
+        return '#b9888a';
+      }
+      else {
+        return '#cba7a8';
+      }
+    }
+  }
+}
+
+function unwantedStyle(){
   return {
     weight: 2,
     opacity: 1,
@@ -91,6 +136,7 @@ function highlightFeature(e, data) {
   layer.setStyle({
     weight: 5,
     color: 'rgb(45,18,22)',
+    // color: 'rgb(250,250,250)',
     dashArray: '',
     fillColor: 'rgb(96,40,46)',
     fillOpacity: 1
@@ -145,7 +191,13 @@ info.onAdd = function (map) {
 
 //Update the info based on what state user has clicked on
 info.update = function (stateName) {
-  console.log('print this function')
-  this._div.innerHTML = (stateName ? '<h4>This is ' + '<b>' + stateName + '</b>' + ' County<h4>' : '<h4>Select a County to View</h4>');
+
+  this._div.innerHTML = ('</b><h4>Select a County to View</h4>');
+
+  for (var i = 0; i < countyNames.length; i++) {
+    if (countyNames[i] == stateName) {
+      this._div.innerHTML = (stateName ? '<h4>This is ' + '<b>' + stateName + '</b>' + ' County<h4> <h4>Total Wine Value Produced </h4> <h4>from 1980-2020: <b>$' + countyTotalValue[i] + '</b></h4>' : '<h4>Select a County to View</h4>');
+    }
+  }
 };
 
