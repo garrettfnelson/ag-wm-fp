@@ -21,7 +21,7 @@ function renderMap() {
   geojson = L.geoJSON(countyBoundaries, {
     style: style,
     onEachFeature: onEachFeature,
-}).addTo(map);
+  }).addTo(map);
 
   unwanted = L.geoJSON(unwantedBoundaries, {
     style: unwantedStyle,
@@ -30,7 +30,7 @@ function renderMap() {
   info.addTo(map);
 };
 
-function style(){
+function style() {
   return {
     weight: 2,
     opacity: 1,
@@ -39,9 +39,9 @@ function style(){
     fillOpacity: 1,
     fillColor: 'rgb(132,54,64)'
   };
-}
+};
 
-function unwantedStyle(){
+function unwantedStyle() {
   return {
     weight: 2,
     opacity: 1,
@@ -110,7 +110,7 @@ function highlightFeature(e, data) {
 function resetHighlight(e, data) {
   geojson.resetStyle(e.target);
 
-  var layer = e.target; 
+  var layer = e.target;
 
   info.update();
 
@@ -118,8 +118,8 @@ function resetHighlight(e, data) {
 
 }
 
-function click(c){
-  if (c.properties && c.properties.COUNTY_NAME){
+function click(c) {
+  if (c.properties && c.properties.COUNTY_NAME) {
     layer.bindPopup("County: " + c.properties.COUNTY_NAME);
   }
 }
